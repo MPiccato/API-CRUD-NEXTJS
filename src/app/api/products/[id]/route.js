@@ -27,4 +27,20 @@ export const DELETE = async (req, { params }) => {
     return NextResponse.json({ data: productEliminado })
 
 
+};
+
+export const PUT = async (req, { params }) => {
+    const id = params.id
+    const datos = process.env.API_URL
+    const product = await req.json()
+    const result = await fetch(`${datos}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(product)
+    });
+    const productUpdate = await result.json()
+    return NextResponse.json({ data: product })
+
 }
